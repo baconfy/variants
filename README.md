@@ -1,3 +1,13 @@
+<p align="center">
+    <img src="https://raw.githubusercontent.com/baconfy/variants/main/docs/presentation.jpg" width="100%" alt="Prompt">
+</p>
+
+[![Tests](https://github.com/baconfy/variants/actions/workflows/tests.yml/badge.svg)](https://github.com/baconfy/variants/actions/workflows/tests.yml)
+[![Latest Version](https://img.shields.io/packagist/v/baconfy/variants.svg)](https://packagist.org/packages/baconfy/variants)
+[![License](https://img.shields.io/packagist/l/baconfy/variants.svg)](https://packagist.org/packages/baconfy/variants)
+[![Total Downloads](https://img.shields.io/packagist/dt/baconfy/variants.svg)](https://packagist.org/packages/baconfy/variants)
+[![PHP Version](https://img.shields.io/packagist/php-v/baconfy/variants.svg)](https://packagist.org/packages/baconfy/variants)
+
 # baconfy/variants
 
 Composable API resources for Laravel. Define named blocks, group them into variants, and select the right shape per endpoint — all in one class, no controllers bloated with conditional fields.
