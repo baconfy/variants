@@ -20,21 +20,8 @@ final class ComposableResourceCollection extends AnonymousResourceCollection
         return $this;
     }
 
-    /**
-     * Stores block names to propagate to each item at resolve time.
-     *
-     * NOTE: The parent JsonResource declares with($request), so mixed is required
-     * here to avoid a fatal signature incompatibility.
-     *
-     * @param  string  ...$blocks
-     */
-    public function with(mixed ...$blocks): static
+    public function append(string ...$blocks): static
     {
-        // Guard for Laravel's internal ResourceResponse::toResponse() call.
-        if (count($blocks) === 1 && reset($blocks) instanceof Request) {
-            return $this;
-        }
-
         array_push($this->extraBlocks, ...$blocks);
 
         return $this;
@@ -48,7 +35,7 @@ final class ComposableResourceCollection extends AnonymousResourceCollection
             }
 
             if ($this->extraBlocks !== []) {
-                $resource->with(...$this->extraBlocks);
+                $resource->append(...$this->extraBlocks);
             }
 
             return $resource->resolve($request);

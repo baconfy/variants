@@ -38,10 +38,10 @@ it('switches variant via as()', function () {
     ]);
 });
 
-it('adds extra block via with()', function () {
+it('adds extra block via append()', function () {
     $result = ProductResource::make($this->product)
         ->as('minimal')
-        ->with('pricing')
+        ->append('pricing')
         ->resolve();
 
     expect($result)->toBe([
@@ -51,11 +51,11 @@ it('adds extra block via with()', function () {
     ]);
 });
 
-it('chains with() additively', function () {
+it('chains append() additively', function () {
     $result = ProductResource::make($this->product)
         ->as('minimal')
-        ->with('pricing')
-        ->with('full')
+        ->append('pricing')
+        ->append('full')
         ->resolve();
 
     expect($result)->toBe([
@@ -96,8 +96,8 @@ it('throws when as() receives unknown variant', function () {
     ProductResource::make($this->product)->as('unknown');
 })->throws(UnknownVariantException::class);
 
-it('throws immediately when with() references unknown block', function () {
-    ProductResource::make($this->product)->with('xpto');
+it('throws immediately when append() references unknown block', function () {
+    ProductResource::make($this->product)->append('xpto');
 })->throws(UnknownBlockException::class);
 
 it('throws when only() references unknown block', function () {
@@ -145,10 +145,10 @@ it('propagates variant through collection', function () {
     ]);
 });
 
-it('propagates variant and with() through collection', function () {
+it('propagates variant and append() through collection', function () {
     $result = ProductResource::collection([$this->product])
         ->as('minimal')
-        ->with('full')
+        ->append('full')
         ->resolve(request());
 
     expect($result)->toBe([

@@ -47,28 +47,13 @@ abstract class ComposableResource extends JsonResource
         return $this;
     }
 
-    /**
-     * Appends extra blocks to the current variant selection.
-     *
-     * NOTE: The parent JsonResource declares with($request), so the PHP type system
-     * requires mixed here. The guard below prevents interference with Laravel's
-     * internal ResourceResponse::toResponse() call.
-     *
-     * @param  string  ...$blocks
-     */
-    public function with(mixed ...$blocks): static
+    public function append(string ...$blocks): static
     {
-        // Guard: Laravel's ResourceResponse calls with($request) to retrieve
-        // additional response envelope data. Return early without modifying state.
-        if (count($blocks) === 1 && reset($blocks) instanceof Request) {
-            return $this;
-        }
-
         $cache = self::$cache[static::class];
 
         foreach ($blocks as $block) {
             if (! array_key_exists($block, $cache['allBlocks'])) {
-                throw new UnknownBlockException(static::class, (string) $block, array_keys($cache['allBlocks']));
+                throw new UnknownBlockException(static::class, $block, array_keys($cache['allBlocks']));
             }
         }
 
@@ -133,7 +118,7 @@ abstract class ComposableResource extends JsonResource
         }
 
         $allBlocks = array_values(array_unique(
-            array_merge(...(array_values($variants) ?: [[]]))
+            array_merge(...array_values($variants))
         ));
 
         foreach ($allBlocks as $block) {
