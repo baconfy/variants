@@ -41,6 +41,7 @@ jobs:
             "illuminate/contracts:^${{ matrix.laravel }}.0" \
             "illuminate/database:^${{ matrix.laravel }}.0" \
             "illuminate/filesystem:^${{ matrix.laravel }}.0" \
+            "illuminate/http:^${{ matrix.laravel }}.0" \
             "illuminate/support:^${{ matrix.laravel }}.0" \
             "illuminate/view:^${{ matrix.laravel }}.0" \
             "orchestra/testbench:${{ matrix.testbench }}" \
